@@ -81,3 +81,6 @@ class CsvFile(AbstractFile):
         with open(self.file_path, 'a', newline='') as file:
             writer = csv.writer(file)
             writer.writerows(data)
+
+
+if __name__ == "__main__":
