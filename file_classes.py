@@ -20,18 +20,31 @@ class AbstractFile(ABC):
         pass
 
 class JsonFile(AbstractFile):
-
+    """
+    функция - иницилизатор
+    param - путь к файлу
+    """
     def __init__(self, file_path):
         self.file_path = file_path
-
+    """
+    функция - чтения 
+    param - путь к файлу
+    """
     def read(self):
         with open(self.file_path, 'r') as file:
             return json.load(file)
-
+    """
+    функция - записи 
+    param - путь к файлу, данные из json файла
+    """
     def write(self, data):
         with open(self.file_path, 'w') as file:
             json.dump(data, file, indent=4)
-
+    """
+    функция - дополнения 
+    param - путь к файлу, данные из json файла
+    исключения - ситуаци, когда файл не найден, или данные json - не корректны
+    """
     def append(self, data):
         try:
             existing_data = self.read()
@@ -45,38 +58,68 @@ class JsonFile(AbstractFile):
 
         self.write(existing_data)
 
+    """
+    класс для работы с txt файлами
+    """
 class TxtFile(AbstractFile):
-
+    """
+    функция - иницилизатор
+    param - путь к файлу
+    """
     def __init__(self, file_path):
         self.file_path = file_path
-
+    """
+    функция - чтения 
+    param - путь к файлу
+    """       
     def read(self):
         with open(self.file_path, 'r') as file:
             return file.read()
-
+    """
+    функция - записи 
+    param - путь к файлу, данные из txt файла
+    """
     def write(self, data):
         with open(self.file_path, 'w') as file:
             file.write(data)
-
+    """
+    функция - дополнения 
+    param - путь к файлу, данные из txt файла
+    """
     def append(self, data):
         with open(self.file_path, 'a') as file:
             file.write(data)
-
+    """
+    класс для работы с сsv файлами
+    """
 class CsvFile(AbstractFile):
-
+    """
+    функция - иницилизатор
+    param - путь к файлу
+    """
     def __init__(self, file_path):
         self.file_path = file_path
 
+    """
+    функция - чтения 
+    param - путь к файлу
+    """   
     def read(self):
         with open(self.file_path, 'r', newline='') as file:
             reader = csv.reader(file)
             return list(reader)
-
+    """
+    функция - записи 
+    param - путь к файлу, данные из csv файла
+    """
     def write(self, data):
         with open(self.file_path, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerows(data)
-
+    """
+    функция - дополнения 
+    param - путь к файлу, данные из csv файла
+    """
     def append(self, data):
         with open(self.file_path, 'a', newline='') as file:
             writer = csv.writer(file)
