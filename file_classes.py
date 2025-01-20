@@ -82,5 +82,24 @@ class CsvFile(AbstractFile):
             writer = csv.writer(file)
             writer.writerows(data)
 
-
 if __name__ == "__main__":
+    # Пример использования JsonFile
+    json_file = JsonFile('example.json')
+    json_file.write([{'name': 'Alice', 'age': 30}, {'name': 'Bob', 'age': 25}])
+    json_file.append({'name': 'Charlie', 'age': 35})
+    print("JSON File Content:")
+    print(json_file.read())
+
+    # Пример использования TxtFile
+    txt_file = TxtFile('example.txt')
+    txt_file.write('Hello, World!')
+    txt_file.append('\nThis is a new line.')
+    print("\nText File Content:")
+    print(txt_file.read())
+
+    # Пример использования CsvFile
+    csv_file = CsvFile('example.csv')
+    csv_file.write([['Name', 'Age'], ['Alice', 30], ['Bob', 25]])
+    csv_file.append([['Charlie', 35]])
+    print("\nCSV File Content:")
+    print(csv_file.read())
